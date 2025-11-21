@@ -5,8 +5,8 @@ on:
     branches:
       - main
 
-  # env:
-  #   image:cherukudocker/equalexpert
+  env:
+    image:cherukudocker/equalexpert
 
 
 jobs:
@@ -27,3 +27,20 @@ jobs:
 
       - name: build with maven
         run: mvn clean verify -Dskiptest=false 
+
+  build_and_push:
+    name: docker build
+    runs-on: ubuntu-latest
+    needs:sonarcloud_scan
+    steps:
+        - name: checkout
+          uses: actions/checkout@v3
+
+          - name: docker login
+          with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+        - name: build and push
+          run: |
+          docker build -t ${{env.image}}: latest .
