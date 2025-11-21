@@ -5,8 +5,8 @@ on:
     branches:
       - main
 
-  env:
-    image:cherukudocker/equalexpert
+  # env:
+  #   image:cherukudocker/equalexpert
 
 
 jobs:
