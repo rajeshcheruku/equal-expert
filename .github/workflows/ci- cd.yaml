@@ -26,4 +26,4 @@ jobs:
           distribution: 'temurin'
 
       - name: build with maven
-        run:mvn clean verify -Dskiptest=false 
+        run: mvn clean verify -Dskiptest=false 
